@@ -1,0 +1,21 @@
+
+/* just make this pretty lol */
+
+:root {
+    --rowNum: 4;
+    --colNum: 5;
+    --gridHeight: 120px;
+    --wrapperH: 40px; 
+}
+
+body {
+    background-color: #f8deee;
+}
+
+canvas {
+     background-color: #ffffff;
+}
+
+.tile {
+    display: inline;
+}

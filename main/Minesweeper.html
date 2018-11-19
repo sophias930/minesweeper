@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>Minesweeper</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel='stylesheet' href='style.css' />
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+        <script src="piece.js"></script>
+        <script src="board.js"></script>
+        <script>
+            var highScore = 0;
+            var highScoreSeconds = 0;
+        </script>
+
+
+
+    </head>
+
+    <body>
+        <div class="top">
+
+
+
+
+            <!-- TIMER to attach to javascript 
+call from reset button to 'reset'-->
+            <label id="minutes">00</label>:<label id="seconds">00</label>
+            <script class="timer">
+                // start on click of '.game'
+
+                var sec = 0;
+                function pad(val) { return val > 9 ? val : "0" + val; }
+                function begin() {
+                    setInterval(function () {
+                    $(document.getElementById("seconds").innerHTML = pad(++sec % 60));
+                    $(document.getElementById("minutes").innerHTML = pad(parseInt(sec / 60, 10)));
+                }, 1000);
+                }
+                function reset() {
+                    sec = 0;
+                    minesweeper($('.width').val(), $('.height').val(), $('.mines').val());
+                }
+
+            </script>
+            <br>
+
+            Width:
+            <input class="width" type="text" name="width" value="8" onchange="reset();">
+            Height:
+            <input class="height" type="text" name="height" value="8" onchange="reset();">
+            Mines:
+            <input class="mines" type="text" name="mines" value="1" onchange="reset();">
+            <br>
+
+            <button type="button" id="reset" class="reset">Restart</button>
+            <script class="restart">
+                $('.reset').click(function () {
+                    reset();
+                })
+            </script>
+        </div>
+        <br>
+        <div class="game">
+            <script>
+               minesweeper($('.width').val(), $('.height').val(), $('.mines').val());
+            </script>
+        </div>
+
+        <div class="bottom">
+            <!--TODO insert the bottom features
+            high score, bombs left -->
+            Bombs Left:
+            <span class="bombs">00:00</span>
+            <br>
+            High Score:
+            <span class="score">
+                
+            </span>
+        </div>
+    </body>
+
+</html>
