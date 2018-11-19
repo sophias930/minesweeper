@@ -601,7 +601,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
     });
     
         // uncover other spaces
-        if (up!=null && !up.revealed) {
+        if (up!=null && !up.revealed && !up.flagged) {
             var id = up.y+'-'+up.x;
             var imagePortions = up.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -611,7 +611,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
                 setImage(id, everything, width, height);
             }
         }
-        if (down!=null && !down.revealed) {
+        if (down!=null && !down.revealed && !down.flagged) {
             var id = down.y+'-'+down.x;
             var imagePortions = down.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -621,7 +621,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
                 setImage(id, everything, width, height);
             }
         }
-        if (left!=null && !left.revealed) {
+        if (left!=null && !left.revealed && !left.flagged) {
             var id = left.y+'-'+left.x;
             var imagePortions = left.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -631,7 +631,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
                 setImage(id, everything, width, height);
             }
         }
-        if (right!=null && !right.revealed) {
+        if (right!=null && !right.revealed && !right.flagged) {
             var id = right.y+'-'+right.x;
             var imagePortions = right.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -640,7 +640,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
             } else {
                 setImage(id, everything, width, height);
             }        }
-        if (upLeft!=null && !upLeft.revealed) {
+        if (upLeft!=null && !upLeft.revealed && !upLeft.flagged) {
             var id = upLeft.y+'-'+upLeft.x;
             var imagePortions = upLeft.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -649,7 +649,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
             } else {
                 setImage(id, everything, width, height);
             }        }
-        if (upRight!=null && !upRight.revealed) {
+        if (upRight!=null && !upRight.revealed && !upRight.flagged) {
             var id = upRight.y+'-'+upRight.x;
             var imagePortions = upRight.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -658,7 +658,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
             } else {
                 setImage(id, everything, width, height);
             }        }
-        if (downLeft!=null && !downLeft.revealed) {
+        if (downLeft!=null && !downLeft.revealed && !downLeft.flagged) {
             var id = downLeft.y+'-'+downLeft.x;
             var imagePortions = downLeft.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
@@ -667,7 +667,7 @@ function setWhites(xCoord, yCoord, everything, width, height) {
             } else {
                 setImage(id, everything, width, height);
             }        }
-        if (downRight!=null && !downRight.revealed) {
+        if (downRight!=null && !downRight.revealed && !downRight.flagged) {
             var id = downRight.y+'-'+downRight.x;
             var imagePortions = downRight.underImage.src.split("/");
             let lastPiece = imagePortions[imagePortions.length-1];
