@@ -20,3 +20,7 @@ canvas {
 .tile {
     display: inline;
 }
+
+.score {
+    display: inline;
+}

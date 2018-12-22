@@ -238,7 +238,7 @@ function setUp(w, h, m) {
 
                     if (surroundFlags == temp.surroundBombs) {
                         // uncover other spaces
-                        if (up!=null && !up.flagged) {
+                        if (up!=null && !up.flagged && !up.revealed) {
                             var id = up.y+'-'+up.x;
                             setImage(id, everything, width, height);
                             if (up.hasBomb) {
@@ -246,7 +246,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (down!=null && !down.flagged) {
+                        if (down!=null && !down.flagged && !down.revealed) {
                             var id = down.y+'-'+down.x;
                             setImage(id, everything, width, height);
                             if (down.hasBomb) {
@@ -254,7 +254,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (left!=null && !left.flagged) {
+                        if (left!=null && !left.flagged && !left.revealed) {
                             var id = left.y+'-'+left.x;
                             setImage(id, everything, width, height);
                             if (left.hasBomb) {
@@ -262,7 +262,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (right!=null && !right.flagged) {
+                        if (right!=null && !right.flagged && !right.revealed) {
                             var id = right.y+'-'+right.x;
                             setImage(id, everything, width, height);
                             if (right.hasBomb) {
@@ -270,7 +270,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (upLeft!=null && !upLeft.flagged) {
+                        if (upLeft!=null && !upLeft.flagged && !upLeft.revealed) {
                             var id = upLeft.y+'-'+upLeft.x;
                             setImage(id, everything, width, height);
                             if (upLeft.hasBomb) {
@@ -278,7 +278,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (upRight!=null && !upRight.flagged) {
+                        if (upRight!=null && !upRight.flagged && !upRight.revealed) {
                             var id = upRight.y+'-'+upRight.x;
                             setImage(id, everything, width, height);
                             if (upRight.hasBomb) {
@@ -286,7 +286,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (downLeft!=null && !downLeft.flagged) {
+                        if (downLeft!=null && !downLeft.flagged && !downLeft.revealed) {
                             var id = downLeft.y+'-'+downLeft.x;
                             setImage(id, everything, width, height);
                             if (downLeft.hasBomb) {
@@ -294,7 +294,7 @@ function setUp(w, h, m) {
                                 revealAll(everything);
                             }
                         }
-                        if (downRight!=null && !downRight.flagged) {
+                        if (downRight!=null && !downRight.flagged && !downRight.revealed) {
                             var id = downRight.y+'-'+downRight.x;
                             setImage(id, everything, width, height);
                             if (downRight.hasBomb) {
@@ -448,8 +448,7 @@ function setUp(w, h, m) {
             current.setUnderImage('bomb.jpg');
         }
 
-        /// based on bombCounter, setUnderImage
-            // to correct number
+        /// based on bombCounter, setUnderImage to correct number
         if (!current.hasBomb) {
             current.surroundBombs = bombCounter;
 
@@ -701,10 +700,12 @@ function setWhites(xCoord, yCoord, everything, width, height) {
                 alert("You lose! :(");
                 revealAll(allArray);
                 lost = true;
+                break;
             } else if (!current.flagged && current.hasBomb) {
                 alert("You lose! :(");
                 revealAll(allArray);
                 lost = true;
+                break;
             }
 
         }
@@ -712,20 +713,27 @@ function setWhites(xCoord, yCoord, everything, width, height) {
             alert("You win! :D");
             revealAll(allArray);
 
-            // STOP TIMER AND RECORD
+            // STOP TIMER AND RECORD HIGH SCORE
             var minutes = parseInt($('#minutes').html());
             var seconds = parseInt($('#seconds').html());
-
             var currentHigh = $('.score').html();
-            console.log("currentHigh: " + currentHigh);
             var minSecs = currentHigh.split(":");
-            var highTotal = (minSecs[0] * 60) + minSecs[1];
-            
-            var currentTotal = (minutes * 60) + seconds;
-            console.log("currentTotal: " + currentTotal);
+            var highMinutes = parseInt(minSecs[0]);
+            var highSecs = 0;
+            if (minSecs.length == 2) {
+                highSecs = parseInt(minSecs[1]);
+            }
+            console.log("high minutes: "+highMinutes);
+            console.log("high seconds: "+highSecs);
+            console.log("minutes: "+minutes);
+            console.log("seconds: " +seconds);
 
-            if (currentTotal < highTotal || highTotal == null) {
-                $('.score').html(minutes+":"+seconds);
+            if (highMinutes == 0 && highSecs == 0) {
+                $('.score').html(pad(minutes)+':'+pad(seconds));
+            } else if (minutes < highMinutes) {
+                $('.score').html(pad(minutes)+':'+pad(seconds));
+            } else if (minutes == highMinutes && seconds < highSecs) {
+                $('.score').html(pad(minutes)+':'+pad(seconds));
             }
 
         }
